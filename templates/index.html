@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Home {% endblock title %}
+{% block body %}
+  
+    <form method="POST" action="/">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title">
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Description</label>
+        <input type="text" class="form-control" id="desc" name="desc">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <table class="table">
+      {% if todos|length ==0 %}
+      <p>No todos added</p>
+      {% else %}
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Title</th>
+          <th scope="col">Description</th>
+          <th scope="col">Date Created</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in todos %}
+        <tr>
+          <th scope="row">{{ loop.index }}</th>
+          <td>{{ todo.title }}</td>
+          <td>{{ todo.desc }}</td>
+          <td>{{ todo.date_created.strftime('%B %d, %Y at %I:%M %p') }}</td>
+          <td>
+            <a href="/update/{{todo.id}}" type="button" class="btn  btn-outline-dark">Update</a>
+            <a href="/delete/{{todo.id}}" type="button" class="btn  btn-outline-dark">Delete</a>
+          </td>
+        </tr>
+
+        {% endfor %}
+        
+      </tbody>
+      {% endif %}
+    </table>
+  {% endblock body %}
