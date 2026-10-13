@@ -9,7 +9,7 @@ class Todo(db.Model):
     id=db.Column(db.Integer,primary_key=True)
     title = db.Column(db.String(100),nullable=False)
     desc= db.Column(db.String(500),nullable=False)
-    date_created=db.Column(db.DateTime,default=datetime.utcnow)
+    date_created=db.Column(db.DateTime,default=datetime.now)
 
     def __init__(self, title: str, desc: str):
         self.title = title
